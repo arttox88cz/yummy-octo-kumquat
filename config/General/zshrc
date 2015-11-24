@@ -1,0 +1,58 @@
+##################
+# history config #
+##################
+SAVEHIST=1000
+HISFILE=~/.zhistory
+setopt append_history inc_append_history share_history extended_history
+setopt hist_ignore_dups hist_ignore_all_dups hist_find_no_dups hist_save_no_dups
+setopt hist_reduce_blanks no_hist_beep hist_ignore_space hist_no_store hist_no_functions
+
+#################################
+# Named directories (very cool) #
+#################################
+Opdrachten=~/Documents/Gemaakte\ Opdrachten 
+Pictures=~/Documents/Pictures
+DNS=~/Documents/Projects/DebianNewbieScript
+Steam=~/.local/share/Steam/steamapps/common/
+Projects=~/Documents/Projects
+: ~Opdrachten ~Pictures ~DNS ~Steam
+
+#############
+# Variables #
+#############
+export EDITOR="emacs -nw"
+export VISUAL="emacs -nw"
+export BROWSER="surf"
+export MOST_EDITOR="emacs -nw %s +%d"
+export TERM="screen-256color"
+
+###########
+# Aliases #
+###########
+alias unmount='umount'   # fix a common mistake
+alias pacman='yaourt'    # Arch Linux specific
+alias apt='sudo apt'     # Simple but important
+alias cemacs='emacs -nw' # Vital for survival
+alias mpct='mpc toggle'  # Random conjecture
+alias mpcs='mpc status'  # Blah blah blah
+alias open='xdg-open'    # Seriously mega useful
+
+alias vim='emacs -nw -l ~/.evilmode.el' #  actually useful vim
+
+##########
+# prompt #
+##########
+autoload -U promptinit
+promptinit
+prompt suse
+
+########
+# Misc #
+########
+setopt no_beep       # disable beeping
+setopt auto_cd       # if it's not a command but a dir cd into it
+setopt cd_able_vars  # similar to auto_cd but for variables
+setopt multios       # Something to with tee or something? It looks important
+setopt correct       # Correct words
+#setopt correct_all   # Tries to correct all words. Can act a bit funky so it's disabled.
+#setopt extended_glob # In case you need some to do some crazy complex shit.
