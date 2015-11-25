@@ -258,6 +258,12 @@ sudo apt install -y chromium chromium-l10n
 echo -e "\nChromium installed!"
 sleep 3
 
+if [ -f ~/.Xresources ]; then
+    mv ~/.Xresources ~/.Xresources.old
+fi
+
+cp config/General/Xresources ~/.Xresources
+
 ###############
 # Final steps #
 ###############
