@@ -111,6 +111,7 @@ sudo apt install wireless-tools firmware-linux firmware-iwlwifi firmware-ralink 
 ###########################
 # SOUND #
 ###########################
+echo "Sound packages..."
 sleep 1
 sudo apt install -y alsa-base alsa-utils alsa-tools-gui alsamixergui aptitude pulseaudio pavumeter pavucontrol paprefs paman
 
@@ -119,14 +120,6 @@ sudo apt install -y alsa-base alsa-utils alsa-tools-gui alsamixergui aptitude pu
 ##############################################################
 clear
 echo "Do you want to install LXDE? [N/y]"
-if [ ! -d ~/docs ]; then
-    mkdir ~/docs
-fi
-
-if [ ! -d ~/docs/misc ]; then
-    mkdir ~/docs/misc
-    mkdir ~/docs/tools
-fi
 read -rn1 ans
 
     if [ "${ans:0:1}" = "N" ] || [ "${ans:0:1}" = "n" ]; then
@@ -181,6 +174,9 @@ read -rn1 ans
 ################################################################################
 # some moved appearance related programs which I want installed no matter what #
 ################################################################################
+clear
+echo "Appearance packages..."
+sleep 1
 sudo apt install -m -y gtk-chtheme gtk-smooth-themes gtk-theme-config gtk-theme-switch gtk2-engines gtk2-engines-aurora gtk2-engines-cleanice gtk2-engines-magicchicken gtk2-engines-moblin gtk2-engines-murrine gtk2-engines-nodoka gtk2-engines-oxygen gtk2-engines-pixbuf gtk2-engines-qtcurve gtk2-engines-wonderland clearlooks-phenix-theme hunspell-en-us hyphen-en-us fonts-inconsolata fonts-dejavu fonts-droid fonts-freefont-ttf fonts-liberation ttf-mscorefonts-installer
 
 ####################################
@@ -237,13 +233,10 @@ sudo apt install -y --no-install-recommends xcursor-themes
 # Installing some optional utilies which we find useful #
 #########################################################
 clear
+echo "Utility packages..."
 sleep 1
 
-if [ ! -d ~/docs/misc ]; then
-    mkdir ~/docs/misc
-fi
-
-sudo apt install -y wipe bleachbit gnupg evolution vlc lame sox vorbis-tools shutter 
+sudo apt install -y wipe bleachbit gnupg vlc lame sox vorbis-tools shutter 
 
 #############
 # wgetpaste #
