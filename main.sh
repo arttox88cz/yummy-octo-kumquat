@@ -60,9 +60,9 @@ echo -e "\nCopying new sources.list..."
     echo -e "\nCopied!"
     sleep 1
     sudo apt update
-    sudo apt install -y firmware-linux-nonfree
+    sudo apt install -y firmware-linux
     clear
-    echo -e "\nInstalled nonfree drivers!"
+    echo -e "\nInstalled basic firmware!"
     sleep 1
 
 ####################
@@ -92,7 +92,7 @@ sleep 1
 sudo apt install -y -m apt-transport-https # install the package for http redirect 
 sudo apt install -y --force-yes deb-multimedia-keyring # install the keyring for a repo
 sudo apt update
-sudo apt install -y -m firmware-linux-free tar unrar zip gzip git aptitude build-essential sudo wget ntp htop gksu e2fsprogs xfsprogs reiserfsprogs reiser4progs jfsutils ntfs-3g fuse gvfs gvfs-fuse fusesmb # install the basic utilities
+sudo apt install -y -m tar unrar zip gzip git aptitude build-essential sudo wget ntp htop gksu e2fsprogs xfsprogs reiserfsprogs reiser4progs jfsutils ntfs-3g fuse gvfs gvfs-fuse fusesmb # install the basic utilities
 
 clear
 
@@ -105,7 +105,7 @@ sudo apt -y --force-yes dist-upgrade
 clear
 echo "Network packages..."
 sleep 1
-sudo apt install wireless-tools firmware-linux firmware-iwlwifi firmware-ralink firmware-ipw2x00 firmware-realtek intel-microcode amd64-microcode network-manager-gnome telnet ssh
+sudo apt install wireless-tools firmware-iwlwifi firmware-ralink firmware-ipw2x00 firmware-realtek intel-microcode amd64-microcode network-manager-gnome telnet ssh
 
 
 ###########################
