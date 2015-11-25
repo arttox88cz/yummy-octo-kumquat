@@ -1,7 +1,0 @@
-@amixer sset Master unmute
-
-@pcmanfm --desktop --profile LXDE
-@xscreensaver -no-splash
-@lxpanel -p LXDE
-@xrdb -merge ~/.Xresources &
-@compton &
