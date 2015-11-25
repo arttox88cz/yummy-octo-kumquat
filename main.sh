@@ -274,8 +274,6 @@ rm -Rf wgetpaste*
 
 sudo apt install xsel
 
-cp /tmp/docs/wgetpaste ~/docs
-
 echo -e "\nWgetpaste installed!"
 sleep 3
 
