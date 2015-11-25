@@ -145,8 +145,8 @@ read -rn1 ans
 	    mkdir -p ~/.config/openbox/
 	fi
 
-	if [ -d ~/pic ]; then
-	    mkdir -p ~/pic
+	if [ ! -d ~/pic ]; then
+	    mkdir ~/pic
 	fi
 	
 	sudo cp wallpaper.jpg $HOME/pic/wallpaper.jpg
@@ -180,36 +180,40 @@ read -rn1 ans
 ################################################################################
 clear
 echo "Appearance packages..."
-sleep 1
+sleep 3
 sudo apt install -m -y gtk-chtheme gtk-smooth-themes gtk-theme-config gtk-theme-switch gtk2-engines gtk2-engines-aurora gtk2-engines-cleanice gtk2-engines-magicchicken gtk2-engines-moblin gtk2-engines-murrine gtk2-engines-nodoka gtk2-engines-oxygen gtk2-engines-pixbuf gtk2-engines-qtcurve gtk2-engines-wonderland clearlooks-phenix-theme hunspell-en-us hyphen-en-us fonts-inconsolata fonts-dejavu fonts-droid fonts-freefont-ttf fonts-liberation ttf-mscorefonts-installer
+
+echo -e "\nAppearance packages installed!"
+sleep 3
 
 ####################################
 # Add some good, everyday programs #
 ####################################
 clear
 echo "Now installing basic programs..."
-sleep 1
+sleep 3
 sudo apt install -y --no-install-recommends aspell aspell-en openjdk-7-jdk openjdk-7-jre icedtea-plugin leafpad libreoffice libreoffice-gtk nano screenfetch shutter transmission-gtk synaptic gimp mg feh gdebi zsh mpd ncmpcpp yelp offlineimap galculator 
-sudo apt install -y -m bash-completion lintian libnss-mdns gvfs-bin gvfs-backends python-keybinder xdg-utils rsync anacron usbutils wmctrl menu bc screen cowsay figlet whois rpl cpufrequtils debconf-utils apt-xapian-index build-essential user-setup avahi-utils avahi-daemon ftp openssh-client sshfs
-
-#############################
-# Move a prompt bit earlier #
-#############################
-clear
-echo "Now prompting for optional programs..."
+sudo apt install -y bash-completion lintian libnss-mdns gvfs-bin gvfs-backends python-keybinder xdg-utils rsync anacron usbutils wmctrl menu bc screen cowsay figlet whois rpl cpufrequtils debconf-utils apt-xapian-index build-essential user-setup avahi-utils avahi-daemon ftp openssh-client sshfs
+#add -m later
+echo -e "\nBasic programs installed!"
 sleep 3
 
 ####################
 # Use a nice shell #
 ####################
+
 clear
-echo "Would you like to use zsh? [N/y]"
+echo -e "\nWould you like to use zsh? [N/y]"
 read -rn1 ans
 
 if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
     sudo apt install -y zsh
+    echo -e "\nzsh installed! Now configuring..."
+    sleep 3
     sudo cp /tmp/config/General/zshrc ~/.zshrc
     sudo chsh -s /bin/zsh $USER
+    echo -e "\nzsh configured!"
+    sleep 3
     
     #echo "# do not prompt" > ~/.zshrc
     #zsh -c "
@@ -222,6 +226,7 @@ if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
     #exit
 else
     echo -e "\nNot using zsh..."
+    sleep 3
 fi
 
 ######################################################
@@ -230,21 +235,33 @@ fi
 # you remove them, remember to delete the references #
 # to it!                                             #
 ######################################################
+clear
+echo "Cursor packages..."
+sleep 3
 sudo apt install -y --no-install-recommends dmz-cursor-theme
 sudo apt install -y --no-install-recommends xcursor-themes
+
+echo -e "Cursor packages installed!"
+sleep 3
 
 #########################################################
 # Installing some optional utilies which we find useful #
 #########################################################
 clear
 echo "Utility packages..."
-sleep 1
+sleep 3
 
 sudo apt install -y wipe bleachbit gnupg vlc lame sox vorbis-tools shutter 
+
+echo -e "\nUtility packages installed!"
+sleep 3
 
 #############
 # wgetpaste #
 #############
+clear
+echo "Installing wgetpaste..."
+sleep 3
 cd /tmp
 rm -Rf wgetpaste*
 wget "http://wgetpaste.zlin.dk/wgetpaste-current.tar.bz2"
@@ -259,29 +276,35 @@ sudo apt install xsel
 
 cp /tmp/docs/wgetpaste ~/docs
 
+echo -e "\nWgetpaste installed!"
+sleep 3
 
 ##########################################################
 # remove some other packages that (may) come pre-bundled #
 ##########################################################
 clear
-echo "Now removing un-needed Programs"
-sleep 1
+echo "Removing bloat..."
+sleep 3
 sudo apt remove --purge -y clipit dillo
+
+echo "Bloat removed!"
+sleep 3
 
 ###################
 # Redshift script #
 ###################
 clear
-echo -e "\aWould you like to install Redshift?\nRedshift is a tool that is designed to change your monitor brightness, gamma, etc. depending on the time of day. It has been proven to reduce eye strain and help people get to sleep on time!\nWould you like to install Redshift? [N/y]"
+echo "Would you like to install Redshift? [N/y]"
 read -rn1 ans
 
 if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
     sudo apt install -y gtk-redshift redshift
     
-    echo "Redshift has been installed."
+    echo -e "\nRedshift installed!"
+    sleep 3
 else
-    echo "Redshift will not be installed."
-
+    echo -e "\nRedshift not installed!"
+    sleep 3
 fi
 
 ####################
@@ -296,52 +319,60 @@ if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
     echo -e "\nWould you like to install Geany? [Y/n]"
     read -rn1 ans
 	
-    if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
-	sudo apt install -y geany geany-plugins
-    fi
+    	if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
+		sudo apt install -y geany geany-plugins
+		echo -e "\nGeany installed!"
+		sleep 3
+    	fi
     
     echo -e "\nWould you like to install vim? [Y/n]"
     read -rn1 ans
     
-    if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
-	sudo apt install -y vim vim-gnome
-	
-    fi
+    	if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
+		sudo apt install -y vim vim-gnome
+		echo -e "\nVim installed!"
+		sleep 3
+    	fi
     
     echo -e "\nWould you like to install Atom? [Y/n]"
     read -rn1 ans
     
-    if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
-	cd /tmp   
-	rm -f atom*
-	wget "https://github.com/atom/atom/releases/download/v1.2.4/atom-amd64.deb"
-	sudo dpkg -i atom-amd64.deb
-    fi
+    	if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
+		cd /tmp   
+		rm -f atom*
+		wget "https://github.com/atom/atom/releases/download/v1.2.4/atom-amd64.deb"
+		sudo dpkg -i atom-amd64.deb
+		echo -e "\nAtom installed!"
+		sleep 3
+    	fi
 	
     echo -e "\nWould you like to install Sublime Text? [Y/n]"
     read -rn1 ans
     
-    if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
-	cd /tmp   
-	rm -f sublime*
-	wget "http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_amd64.deb"
-	sudo dpkg -i sublime-text_build-3083_amd64.deb
-    fi
-
+    	if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
+		cd /tmp   
+		rm -f sublime*
+		wget "http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_amd64.deb"
+		sudo dpkg -i sublime-text_build-3083_amd64.deb
+		echo -e "\nSublime installed!"
+		sleep 3
+    	fi
 fi
 	
 ###########
 # Compton #
 ###########
 clear
-echo -e "\aWould you like to download compton?\nCompton is a lightweight compositor for X.\nThis means it adds things like transparency and shadows to your desktop.\nWould you like to download Compton? [N/y]"
+echo -e "\nWould you like to download compton? [N/y]"
 read -rn1 ans
 
 if [ ! "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
     sudo apt install -y -m compton compton-conf
-    echo "Compton installed!"
+    echo -e "\nCompton installed!"
+    sleep 3
 else
-    echo "Compton not installed!"
+    echo -e "\nCompton not installed!"
+    sleep 3
 
 fi
 
@@ -349,7 +380,8 @@ fi
 # arc theme #
 #############
 clear
-echo -e "\nInstalling arc theme..."
+echo "Installing arc theme..."
+sleep 3
 sudo apt -y install autoconf automake pkg-config libgtk-3-dev git
 
 if [ ! -d arc-theme ]; then
@@ -362,31 +394,48 @@ fi
 ./autogen.sh --prefix=/usr --disable-transparency --disable-cinnamon --disable-gnome-shell --disable-metacity --disable-unity --disable-xfwm
 sudo make install
 
+echo -e "\nArc theme installed!"
+sleep 3
+
 ###############
 # numix stuff #									### CHECK THIS
 ###############
-echo -e "\nInstalling numix..."
+clear
+echo "Installing numix..."
 cd /tmp
 sudo apt-key add config/General/numix.key
 sudo apt update
 sudo apt install -y -m numix-{gtk,icon}-theme numix-wallpaper-{notd,saucy,fs,halloween,winter-chill,lightbulb,simple-things,mr-numix,kitty,mesh,aurora} numix-icon-theme-circle
 
+echo -e "\nNumix installed!"
+sleep 3
 #############
 # Chromium #
 #############
-
 clear
-echo -e "\nInstalling chromium..."
+echo "Installing chromium..."
 sudo apt install -y chromium
+
+echo -e "\nChromium installed!"
+sleep 3
 
 #######################
 # Configuration files #
 #######################
+clear
+echo "Copying Xresources..."
+sleep 3
 cp config/General/Xresources ~/.Xresources
+echo -e "\nCopied!"
+sleep 1
 
 ###############
 # Final steps #
 ###############
+clear
+echo "Finishing..."
+sleep 3
+
 sudo apt update
 sudo apt upgrade -y
 sudo apt -f -y install
@@ -400,8 +449,7 @@ if [ -f ~/.Xauthority ]; then				## sometimes becomes corrupted after installing
     mv ~/.Xauthority ~/.Xauthority.old
 fi
 
-sudo update-menus
-update-menus
+sudo update-menus && update-menus && echo -e "\nMenus updated!" && sleep 3 || echo -e "\nFailed to update menus!"
 
 #######
 # End #
