@@ -412,7 +412,7 @@ sleep 3
 #############
 clear
 echo "Installing chromium..."
-sudo apt install -y chromium
+sudo apt install -y chromium chromium-l10n
 
 echo -e "\nChromium installed!"
 sleep 3
