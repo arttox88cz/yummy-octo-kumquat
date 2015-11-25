@@ -1,5 +1,5 @@
 #!/bin/bash 
-# A simple install script for Debian netinst LXDE
+# A simple install script for Debian netinst
 
 echo -e "\nWelcome! \n$(date)"
 sleep 3
