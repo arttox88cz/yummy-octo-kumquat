@@ -27,10 +27,10 @@ echo -e "Do you want to continue with installation? [Y/n]"
 read -rn1 ans
 
 if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
-    echo -e "Starting..."
+    echo -e "\nStarting..."
     sleep 3
  else
-       echo -e "Aborting..."
+       echo -e "\Aborting..."
        sleep 1
        exit
 fi
@@ -41,46 +41,39 @@ fi
 clear
 echo -e "Started! If you wish to quit, perform: su -c killall main.sh in a separate terminal."
 
-#################################################################
-# Update, make sure sudo is installed, make sure user is sudoer #
-#################################################################
-su --preserve-environment -c "apt update && apt install sudo && echo -e '$USER ALL=(ALL:ALL) ALL' >> /etc/sudoers"
-
-################
-# Auto install #
-################
-
 #################
-# Prerequisites #						### JUST CHANGE SOURCES.LIST, CHECK ON DRIVERS  ### CAN CHOOSE STABLE/TESTING/UNSTABLE??
+# Prerequisites #					  
 #################
 echo -e "\nPreparing the system..."
+sleep 1
 echo -e "\nCopying new sources.list..."
+sleep 1
 
-    sudo cp apt/sources.list /etc/apt/sources.list
-    echo -e "\nCopied!"
-    sleep 1
-    sudo apt update
-    sudo apt install -y firmware-linux
-    clear
-    echo -e "\nInstalled basic firmware!"
-    sleep 1
+sudo cp apt/sources.list /etc/apt/sources.list
+echo -e "\nCopied!"
+sleep 1
+
+sudo apt update
+sudo apt install -y firmware-linux
+
+echo -e "\nInstalled basic firmware!"
+sleep 3
 
 ####################
 # Begin Automation #
 ####################
-sleep 2
 clear
 echo "Do you want to remove pre-existing DEs? [N/y]" 
 read -rn1 ans
 
 if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
     sudo apt remove --purge -y gnome. kde. xfce. cinnamon. mate. 
-    clear
-    echo -e "DEs removed!\n"
-    sleep 2
+    
+    echo -e "\nDEs removed!"
+    sleep 3
 else
-    echo -e "\nNot removing DEs!\n"
-    sleep 2
+    echo -e "\nNot removing DEs!"
+    sleep 3
 fi
 
 ###########################
@@ -88,14 +81,16 @@ fi
 ###########################
 clear
 echo "Now installing needed system packages..."
-sleep 1
+sleep 3
 sudo apt install -y -m apt-transport-https # install the package for http redirect 
 sudo apt install -y --force-yes deb-multimedia-keyring # install the keyring for a repo
 sudo apt update
-sudo apt install -y -m tar unrar zip gzip git aptitude build-essential sudo wget ntp htop gksu e2fsprogs xfsprogs reiserfsprogs reiser4progs jfsutils ntfs-3g fuse gvfs gvfs-fuse fusesmb # install the basic utilities
+sudo apt install -y  tar unrar zip gzip git aptitude build-essential sudo wget ntp htop gksu e2fsprogs xfsprogs reiserfsprogs reiser4progs jfsutils ntfs-3g fuse gvfs gvfs-fuse fusesmb # install the basic utilities
+# add -m later after debugged
+
+echo -e "\nInstalled system packages!"
 
 clear
-
 echo "Rechecking Debian database..."
 sudo apt -y --force-yes dist-upgrade
 
@@ -104,16 +99,22 @@ sudo apt -y --force-yes dist-upgrade
 ###########################
 clear
 echo "Network packages..."
-sleep 1
+sleep 3
 sudo apt install -y wireless-tools firmware-iwlwifi firmware-ralink firmware-ipw2x00 firmware-realtek intel-microcode amd64-microcode network-manager-gnome telnet ssh
 
+echo -e "\nInstalled network packages!"
+sleep 3
 
 ###########################
 # SOUND #
 ###########################
+clear
 echo "Sound packages..."
-sleep 1
+sleep 3
 sudo apt install -y alsa-base alsa-utils alsa-tools-gui alsamixergui aptitude pulseaudio pavumeter pavucontrol paprefs paman
+
+echo -e "\nInstalled sound packages!"
+sleep 3
 
 ##############################################################
 # install LXDE #
@@ -123,8 +124,11 @@ echo "Do you want to install LXDE? [N/y]"
 read -rn1 ans
 
     if [ "${ans:0:1}" = "N" ] || [ "${ans:0:1}" = "n" ]; then
-	echo "Not installing LXDE..."
+	echo -e "\nNot installing LXDE..."
     else
+    	echo -e "\nInstalling LXDE..."
+    	sleep 3
+    	
 	sudo apt install -m -y --no-install-recommends lxde-core lxde lxde-common task-lxde-desktop lxde-settings-daemon lxde-icon-theme lightdm
 	sudo apt remove --purge -y wicd.
 	sudo apt install -y -m alsamixergui evince-gtk evolution gpicview lxpolkit menu-xdg lxsession lxtask lxterminal lxpanel lxappearance pcmanfm usermode xserver-xorg xscreensaver network-manager
