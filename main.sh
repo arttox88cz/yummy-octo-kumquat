@@ -105,7 +105,7 @@ sudo apt -y --force-yes dist-upgrade
 clear
 echo "Network packages..."
 sleep 1
-sudo apt install wireless-tools firmware-iwlwifi firmware-ralink firmware-ipw2x00 firmware-realtek intel-microcode amd64-microcode network-manager-gnome telnet ssh
+sudo apt install -y wireless-tools firmware-iwlwifi firmware-ralink firmware-ipw2x00 firmware-realtek intel-microcode amd64-microcode network-manager-gnome telnet ssh
 
 
 ###########################
@@ -311,7 +311,7 @@ if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
 	cd /tmp   
 	rm -f atom*
 	wget "https://github.com/atom/atom/releases/download/v1.2.4/atom-amd64.deb"
-	sudo dpkg --install atom-amd64.deb
+	sudo dpkg -i atom-amd64.deb
     fi
 	
     echo -e "\nWould you like to install Sublime Text? [Y/n]"
