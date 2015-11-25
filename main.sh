@@ -59,34 +59,16 @@ sudo apt install -y firmware-linux
 echo -e "\nInstalled basic firmware!"
 sleep 3
 
-####################
-# Begin Automation #
-####################
-clear
-echo "Do you want to remove pre-existing DEs? [N/y]" 
-read -rn1 ans
-
-if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
-    sudo apt remove --purge -y gnome. kde. xfce. cinnamon. mate. 
-    
-    echo -e "\nDEs removed!"
-    sleep 3
-else
-    echo -e "\nNot removing DEs!"
-    sleep 3
-fi
-
 ###########################
 # install needed packages #
 ###########################
 clear
 echo "Now installing needed system packages..."
 sleep 3
-sudo apt install -y -m apt-transport-https # install the package for http redirect 
-sudo apt install -y --force-yes deb-multimedia-keyring # install the keyring for a repo
+sudo apt install -y -m apt-transport-https 
+sudo apt install -y --force-yes deb-multimedia-keyring 
 sudo apt update
-sudo apt install -y  tar unrar zip gzip git aptitude build-essential sudo wget ntp htop gksu e2fsprogs xfsprogs reiserfsprogs reiser4progs jfsutils ntfs-3g fuse gvfs gvfs-fuse fusesmb # install the basic utilities
-# add -m later after debugged
+sudo apt install -y -m tar unrar zip gzip git aptitude build-essential sudo wget ntp htop gksu e2fsprogs xfsprogs reiserfsprogs reiser4progs jfsutils ntfs-3g fuse gvfs gvfs-fuse fusesmb flashplugin-nonfree suckless-tools
 
 echo -e "\nInstalled system packages!"
 
@@ -94,88 +76,7 @@ clear
 echo "Rechecking Debian database..."
 sudo apt -y --force-yes dist-upgrade
 
-###########################
-# NETWORK #
-###########################
-clear
-echo "Network packages..."
-sleep 3
-sudo apt install -y wireless-tools firmware-iwlwifi firmware-ralink firmware-ipw2x00 firmware-realtek intel-microcode amd64-microcode network-manager-gnome telnet ssh
-
-echo -e "\nInstalled network packages!"
-sleep 3
-
-###########################
-# SOUND #
-###########################
-clear
-echo "Sound packages..."
-sleep 3
-sudo apt install -y alsa-base alsa-utils alsa-tools-gui alsamixergui aptitude pulseaudio pavumeter pavucontrol paprefs paman
-
-echo -e "\nInstalled sound packages!"
-sleep 3
-
-##############################################################
-# install LXDE #
-##############################################################
-clear
-echo "Do you want to install LXDE? [N/y]"
-read -rn1 ans
-
-    if [ "${ans:0:1}" = "N" ] || [ "${ans:0:1}" = "n" ]; then
-	echo -e "\nNot installing LXDE..."
-    else
-    	echo -e "\nInstalling LXDE..."
-    	sleep 3
-    	
-	sudo apt install -m -y --no-install-recommends lxde-core lxde lxde-common task-lxde-desktop lxde-settings-daemon lxde-icon-theme
-	sudo apt remove --purge -y wicd.
-	sudo apt install -y -m alsamixergui evince-gtk evolution gpicview lxpolkit menu-xdg lxsession lxtask lxterminal lxpanel lxappearance pcmanfm usermode xserver-xorg xscreensaver network-manager
-	sudo apt install -y --no-install-recommends xarchiver flashplugin-nonfree gmrun xinput suckless-tools xfce4-power-manager xfce4-power-manager-plugins
-
-	if [ ! -d ~/.config/lxpanel/LXDE/panels ]; then
-	    mkdir -p ~/.config/lxpanel/LXDE/panels
-	    mkdir -p ~/.config/lxsession/LXDE
-	    mkdir -p ~/.config/pcmanfm/LXDE
-	    mkdir -p ~/.config/lxterminal
-        fi
-
-	if [ -d ~/.config/openbox ]; then
-	    mkdir -p ~/.config/openbox/
-	fi
-
-	if [ ! -d ~/pic ]; then
-	    mkdir ~/pic
-	fi
-	
-	sudo cp wallpaper.jpg $HOME/pic/wallpaper.jpg
-	echo "wallpaper=$HOME/pic/wallpaper.jpg" >> /tmp/config/LXDE/desktop-items-0.conf				
-
-	if [ ! -f ~/.config/lxterminal/lxterminal ]; then
-	    cp config/LXDE/lxterminal.conf ~/.config/lxterminal
-	fi
-	if [ ! -f ~/.config/lxsession/LXDE/autostart ]; then
-	    cp config/LXDE/autostart ~/.config/lxsession/LXDE
-	fi
-	if [ ! -f ~/.config/lxsession/LXDE/desktop.conf ]; then
-	    cp config/LXDE/desktop.conf ~/.config/lxsession/LXDE
-	fi
-	if [ ! -f ~/.config/lxpanel/launchtaskbar.cfg ]; then
-	    cp config/LXDE/launchtaskbar.cfg ~/.config/lxpanel
-	fi
-	if [ ! -f ~/.config/lxpanel/LXDE/panels/panel ]; then
-	    cp config/LXDE/panel ~/.config/lxpanel/LXDE/panels
-	fi
-	if [ ! -f ~/.config/pcmanfm/LXDE/desktop-items-0.conf ]; then
-	    cp config/LXDE/desktop-items-0.conf ~/.config/pcmanfm/LXDE
-	fi
-	if [ ! -f ~/.config/openbox/lxde-rc.xml ]; then
-	    cp config/LXDE/lxde-rc.xml ~/.config/openbox
-	fi
-    fi
-
-################################################################################
+#############################################################
 # some moved appearance related programs which I want installed no matter what #
 ################################################################################
 clear
@@ -192,9 +93,9 @@ sleep 3
 clear
 echo "Now installing basic programs..."
 sleep 3
-sudo apt install -y --no-install-recommends aspell aspell-en openjdk-7-jdk openjdk-7-jre icedtea-plugin leafpad libreoffice libreoffice-gtk nano screenfetch shutter transmission-gtk synaptic gimp mg feh gdebi zsh mpd ncmpcpp yelp offlineimap galculator 
-sudo apt install -y bash-completion lintian libnss-mdns gvfs-bin gvfs-backends python-keybinder xdg-utils rsync anacron usbutils wmctrl menu bc screen cowsay figlet whois rpl cpufrequtils debconf-utils apt-xapian-index build-essential user-setup avahi-utils avahi-daemon ftp openssh-client sshfs
-#add -m later
+sudo apt install -y --no-install-recommends openjdk-7-jdk openjdk-7-jre icedtea-plugin libreoffice libreoffice-gtk transmission-gtk synaptic gimp mg gdebi zsh mpd ncmpcpp yelp offlineimap galculator 
+sudo apt install -y -m bash-completion lintian libnss-mdns gvfs-bin gvfs-backends python-keybinder xdg-utils rsync anacron usbutils wmctrl menu bc screen cowsay figlet whois rpl cpufrequtils debconf-utils apt-xapian-index build-essential user-setup avahi-utils avahi-daemon ftp openssh-client sshfs dconf-editor
+
 echo -e "\nBasic programs installed!"
 sleep 3
 
@@ -251,41 +152,9 @@ clear
 echo "Utility packages..."
 sleep 3
 
-sudo apt install -y wipe bleachbit gnupg vlc lame sox vorbis-tools shutter 
+sudo apt install -y wipe bleachbit gnupg vlc lame sox vorbis-tools
 
 echo -e "\nUtility packages installed!"
-sleep 3
-
-#############
-# wgetpaste #
-#############
-clear
-echo "Installing wgetpaste..."
-sleep 3
-cd /tmp
-rm -Rf wgetpaste*
-wget "http://wgetpaste.zlin.dk/wgetpaste-current.tar.bz2"
-tar xf wgetpaste*
-rm -f wgetpaste-current.tar.bz2
-cd wgetpaste*
-sudo cp wgetpaste /usr/bin
-cd ..
-rm -Rf wgetpaste*
-
-sudo apt install xsel
-
-echo -e "\nWgetpaste installed!"
-sleep 3
-
-##########################################################
-# remove some other packages that (may) come pre-bundled #
-##########################################################
-clear
-echo "Removing bloat..."
-sleep 3
-sudo apt remove --purge -y clipit dillo
-
-echo "Bloat removed!"
 sleep 3
 
 ###################
@@ -343,35 +212,6 @@ if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
 		echo -e "\nAtom installed!"
 		sleep 3
     	fi
-	
-    echo -e "\nWould you like to install Sublime Text? [Y/n]"
-    read -rn1 ans
-    
-    	if [ "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
-		cd /tmp   
-		rm -f sublime*
-		wget "http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_amd64.deb"
-		sudo dpkg -i sublime-text_build-3083_amd64.deb
-		echo -e "\nSublime installed!"
-		sleep 3
-    	fi
-fi
-	
-###########
-# Compton #
-###########
-clear
-echo -e "\nWould you like to download compton? [N/y]"
-read -rn1 ans
-
-if [ ! "${ans:0:1}" = "Y" ] || [ "${ans:0:1}" = "y" ]; then
-    sudo apt install -y -m compton compton-conf
-    echo -e "\nCompton installed!"
-    sleep 3
-else
-    echo -e "\nCompton not installed!"
-    sleep 3
-
 fi
 
 #############
@@ -389,7 +229,7 @@ else
 
 fi
 
-./autogen.sh --prefix=/usr --disable-transparency --disable-cinnamon --disable-gnome-shell --disable-metacity --disable-unity --disable-xfwm
+./autogen.sh --prefix=/usr
 sudo make install
 
 echo -e "\nArc theme installed!"
@@ -412,20 +252,11 @@ sleep 3
 #############
 clear
 echo "Installing chromium..."
+sudo apt remove --purge -y iceweasel
 sudo apt install -y chromium chromium-l10n
 
 echo -e "\nChromium installed!"
 sleep 3
-
-#######################
-# Configuration files #
-#######################
-clear
-echo "Copying Xresources..."
-sleep 3
-cp config/General/Xresources ~/.Xresources
-echo -e "\nCopied!"
-sleep 1
 
 ###############
 # Final steps #
@@ -439,11 +270,6 @@ sudo apt upgrade -y
 sudo apt -f -y install
 sudo apt-get autoremove --purge 
 sudo apt-get autoclean
-sudo chown -R $USER:$USER $HOME/* 
-sudo dpkg-reconfigure ntp
-sudo alsactl store
-
-sudo update-menus && update-menus && echo -e "\nMenus updated!" && sleep 3 || echo -e "\nFailed to update menus!"
 
 #######
 # End #
