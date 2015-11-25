@@ -16,3 +16,6 @@ deb http://httpredir.debian.org/debian/ jessie-backports main contrib non-free
 # numix
 deb http://ppa.launchpad.net/numix/ppa/ubuntu wily main 
 deb-src http://ppa.launchpad.net/numix/ppa/ubuntu wily main 
+
+# multimedia
+deb http://www.deb-multimedia.org stable main non-free 
