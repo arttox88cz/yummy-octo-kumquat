@@ -129,7 +129,7 @@ read -rn1 ans
     	echo -e "\nInstalling LXDE..."
     	sleep 3
     	
-	sudo apt install -m -y --no-install-recommends lxde-core lxde lxde-common task-lxde-desktop lxde-settings-daemon lxde-icon-theme lightdm
+	sudo apt install -m -y --no-install-recommends lxde-core lxde lxde-common task-lxde-desktop lxde-settings-daemon lxde-icon-theme
 	sudo apt remove --purge -y wicd.
 	sudo apt install -y -m alsamixergui evince-gtk evolution gpicview lxpolkit menu-xdg lxsession lxtask lxterminal lxpanel lxappearance pcmanfm usermode xserver-xorg xscreensaver network-manager
 	sudo apt install -y --no-install-recommends xarchiver flashplugin-nonfree gmrun xinput suckless-tools xfce4-power-manager xfce4-power-manager-plugins
@@ -444,10 +444,6 @@ sudo apt-get autoclean
 sudo chown -R $USER:$USER $HOME/* 
 sudo dpkg-reconfigure ntp
 sudo alsactl store
-
-if [ -f ~/.Xauthority ]; then				## sometimes becomes corrupted after installing lightdm
-    mv ~/.Xauthority ~/.Xauthority.old
-fi
 
 sudo update-menus && update-menus && echo -e "\nMenus updated!" && sleep 3 || echo -e "\nFailed to update menus!"
 
